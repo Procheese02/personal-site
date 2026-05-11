@@ -91,11 +91,11 @@ npm -v
 
 ```bash
 cd ~
-git clone https://github.com/<your-github-username>/jingyao-qi-personal-site.git
-cd jingyao-qi-personal-site
+git clone https://github.com/<your-github-username>/personal-site.git
+cd personal-site
 ```
 
-If your repository has a different name, replace `jingyao-qi-personal-site` with that repo name.
+If your repository has a different name, replace `personal-site` with that repo name.
 
 ### 4. Build the site
 
@@ -134,7 +134,7 @@ After changing the website and pushing to GitHub:
 
 ```bash
 ssh -i <your-key>.pem ec2-user@<your-ec2-public-ip>
-cd ~/jingyao-qi-personal-site
+cd ~/personal-site
 git pull
 nvm use 22
 npm install
