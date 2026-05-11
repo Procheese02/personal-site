@@ -21,8 +21,8 @@ const courseworkLabels = { computerScience: '计算机科学', softwareEngineeri
   <main>
     <Section id="about" title={t.aboutTitle} body={t.aboutBody}>
       <div class="grid gap-4 md:grid-cols-3">
-        {profile.roles.map((role) => (
-          <div class="rounded-[1.5rem] border border-line bg-panel/70 p-6 backdrop-blur">
+        {profile.roles[locale].map((role) => (
+          <div class="motion-card rounded-[1.5rem] border border-line bg-panel/70 p-6 backdrop-blur">
             <p class="text-sm font-semibold uppercase tracking-[0.22em] text-cyan">方向</p>
             <p class="mt-3 text-lg font-semibold text-white">{role}</p>
           </div>
@@ -47,7 +47,7 @@ const courseworkLabels = { computerScience: '计算机科学', softwareEngineeri
     <Section id="coursework" title={t.courseworkTitle}>
       <div class="grid gap-4 md:grid-cols-2">
         {Object.entries(profile.coursework).map(([key, courses]) => (
-          <div class="rounded-[1.5rem] border border-line bg-panel/70 p-6 backdrop-blur">
+          <div class="motion-card rounded-[1.5rem] border border-line bg-panel/70 p-6 backdrop-blur">
             <h3 class="mb-4 text-lg font-semibold text-white">{courseworkLabels[key as keyof typeof courseworkLabels]}</h3>
             <div class="flex flex-wrap gap-2">
               {courses.map((course) => <span class="rounded-full border border-line bg-white/[0.04] px-3 py-1.5 text-sm text-slate-300">{course}</span>)}

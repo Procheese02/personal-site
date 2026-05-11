@@ -4,6 +4,7 @@ import type { Locale } from '../content/i18n';
 import { copy } from '../content/i18n';
 import { profile } from '../content/profile';
 import BackToTop from '../components/BackToTop.astro';
+import SiteAtmosphere from '../components/SiteAtmosphere';
 
 interface Props {
   locale: Locale;
@@ -17,7 +18,7 @@ const jsonLd = {
   name: profile.name[locale],
   email: profile.email[locale],
   address: profile.location,
-  jobTitle: profile.roles,
+  jobTitle: profile.roles[locale],
   alumniOf: profile.education.map((item) => ({
     '@type': 'CollegeOrUniversity',
     name: item.school,
@@ -49,9 +50,39 @@ const jsonLd = {
     <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   </head>
   <body class="min-h-screen bg-ink text-slate-100 antialiased">
+    <SiteAtmosphere client:load />
     <div class="fixed inset-0 -z-10 bg-[radial-gradient(circle_at_top_left,rgba(34,211,238,0.16),transparent_28rem),radial-gradient(circle_at_top_right,rgba(167,139,250,0.14),transparent_26rem),linear-gradient(180deg,#07090f_0%,#0b1020_48%,#07090f_100%)]"></div>
     <div class="fixed inset-0 -z-10 bg-[linear-gradient(rgba(148,163,184,0.045)_1px,transparent_1px),linear-gradient(90deg,rgba(148,163,184,0.045)_1px,transparent_1px)] bg-[size:48px_48px]"></div>
     <slot />
     <BackToTop />
+    <script is:inline>
+      const revealSections = () => {
+        const sections = document.querySelectorAll('.reveal-section');
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.18 });
+
+        sections.forEach((section) => observer.observe(section));
+      };
+
+      const addCardGlow = () => {
+        document.querySelectorAll('.motion-card').forEach((card) => {
+          card.addEventListener('pointermove', (event) => {
+            const target = event.currentTarget;
+            const rect = target.getBoundingClientRect();
+            target.style.setProperty('--card-glow-x', `${((event.clientX - rect.left) / rect.width) * 100}%`);
+            target.style.setProperty('--card-glow-y', `${((event.clientY - rect.top) / rect.height) * 100}%`);
+          });
+        });
+      };
+
+      revealSections();
+      addCardGlow();
+    </script>
   </body>
 </html>

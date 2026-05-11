@@ -22,12 +22,12 @@ export const projects: Project[] = [
     highlights: [
       'Built a LangGraph multi-agent workflow for inspection, pricing research, and optimization recommendations.',
       'Integrated Qdrant-backed RAG over structured AWS pricing and downgrade policy data.',
-      'Added safe AWS paths for Cost Explorer import, CloudWatch enrichment, dry-run planning, and human-approved execution.',
+      'Added safe AWS paths for Cost Explorer import, CloudWatch enrichment, dry-run planning, and human-approved execution. (In progress)',
     ],
     highlightsZh: [
       '使用 LangGraph 构建多 Agent 工作流，覆盖资源检查、定价研究和优化建议生成。',
       '基于 Qdrant 构建 RAG 检索，管理结构化 AWS 定价和降配策略数据。',
-      '实现 Cost Explorer 导入、CloudWatch 增强、dry-run 计划和人工审批执行等安全 AWS 流程。',
+      '实现 Cost Explorer 导入、CloudWatch 增强、dry-run 计划和人工审批执行等安全 AWS 流程。（阶段进行中）',
     ],
     tech: ['Python', 'LangGraph', 'RAG', 'Qdrant', 'boto3', 'AWS Cost Explorer', 'CloudWatch'],
     githubUrl: 'https://github.com/Procheese02/CloudOptix.git',
