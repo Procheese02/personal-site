@@ -1,5 +1,8 @@
 export const profile = {
-  name: 'Jingyao Qi',
+  name: {
+    en: 'Jingyao Qi',
+    zh: '齐旌尧',
+  },
   email: {
     en: 'andyqi315@gmail.com',
     zh: '2214109912@qq.com',

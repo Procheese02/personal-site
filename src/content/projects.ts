@@ -8,7 +8,7 @@ export type Project = {
   highlights: string[];
   highlightsZh: string[];
   tech: string[];
-  featured?: boolean;
+  githubUrl?: string;
 };
 
 export const projects: Project[] = [
@@ -30,6 +30,7 @@ export const projects: Project[] = [
       '实现 Cost Explorer 导入、CloudWatch 增强、dry-run 计划和人工审批执行等安全 AWS 流程。',
     ],
     tech: ['Python', 'LangGraph', 'RAG', 'Qdrant', 'boto3', 'AWS Cost Explorer', 'CloudWatch'],
+    githubUrl: 'https://github.com/Procheese02/CloudOptix.git',
     featured: true,
   },
   {

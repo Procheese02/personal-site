@@ -14,7 +14,7 @@ const t = copy[locale];
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Person',
-  name: profile.name,
+  name: profile.name[locale],
   email: profile.email[locale],
   address: profile.location,
   jobTitle: profile.roles,

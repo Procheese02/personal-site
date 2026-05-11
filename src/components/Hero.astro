@@ -11,6 +11,7 @@ interface Props {
 const { locale } = Astro.props;
 const t = copy[locale];
 const email = profile.email[locale];
+const name = profile.name[locale];
 ---
 
 <header class="mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-6">
@@ -30,13 +31,13 @@ const email = profile.email[locale];
 <section class="mx-auto grid min-h-[72vh] w-full max-w-6xl items-center gap-12 px-6 py-12 lg:grid-cols-[1.1fr_0.9fr]">
   <div>
     <h1 class="font-display text-5xl font-semibold leading-tight tracking-tight text-white sm:text-6xl lg:text-7xl">
-      {profile.name}
+      {name}
       <span class="block bg-gradient-to-r from-cyan via-sky-200 to-violet bg-clip-text text-transparent">{t.heroTitle}</span>
     </h1>
     <p class="mt-6 max-w-2xl text-lg leading-8 text-slate-300">{t.heroBody}</p>
     <div class="mt-8 flex flex-wrap gap-3">
       <a href="#contact" class="rounded-full bg-cyan px-5 py-3 text-sm font-semibold text-slate-950 transition hover:bg-sky-200">{t.contactCta}</a>
-      <a href="#projects" class="rounded-full border border-line bg-white/5 px-5 py-3 text-sm font-semibold text-white transition hover:border-violet/60 hover:bg-violet/10">{t.projectsCta}</a>
+      <a href="#projects" class="secondary-action rounded-full border border-line bg-white/5 px-5 py-3 text-sm font-semibold text-white transition hover:border-violet/60 hover:bg-violet/10">{t.projectsCta}</a>
     </div>
   </div>
   <div class="rounded-[2rem] border border-line bg-panel/75 p-6 shadow-2xl shadow-black/30 backdrop-blur">
