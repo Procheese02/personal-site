@@ -1,0 +1,57 @@
+---
+import '../styles/global.css';
+import type { Locale } from '../content/i18n';
+import { copy } from '../content/i18n';
+import { profile } from '../content/profile';
+import BackToTop from '../components/BackToTop.astro';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = copy[locale];
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: profile.name,
+  email: profile.email[locale],
+  address: profile.location,
+  jobTitle: profile.roles,
+  alumniOf: profile.education.map((item) => ({
+    '@type': 'CollegeOrUniversity',
+    name: item.school,
+  })),
+  knowsAbout: Object.values(profile.skills).flat(),
+};
+---
+
+<!doctype html>
+<html lang={t.lang} class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{t.title}</title>
+    <meta name="description" content={t.description} />
+    <meta name="theme-color" content="#07090f" />
+    <meta property="og:type" content="profile" />
+    <meta property="og:title" content={t.title} />
+    <meta property="og:description" content={t.description} />
+    <meta property="og:site_name" content="Jingyao Qi" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="alternate" hreflang="en" href="/" />
+    <link rel="alternate" hreflang="zh-CN" href="/zh/" />
+    <script is:inline>
+      const savedTheme = localStorage.getItem('theme');
+      const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+      document.documentElement.dataset.theme = savedTheme ?? (prefersLight ? 'light' : 'dark');
+    </script>
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </head>
+  <body class="min-h-screen bg-ink text-slate-100 antialiased">
+    <div class="fixed inset-0 -z-10 bg-[radial-gradient(circle_at_top_left,rgba(34,211,238,0.16),transparent_28rem),radial-gradient(circle_at_top_right,rgba(167,139,250,0.14),transparent_26rem),linear-gradient(180deg,#07090f_0%,#0b1020_48%,#07090f_100%)]"></div>
+    <div class="fixed inset-0 -z-10 bg-[linear-gradient(rgba(148,163,184,0.045)_1px,transparent_1px),linear-gradient(90deg,rgba(148,163,184,0.045)_1px,transparent_1px)] bg-[size:48px_48px]"></div>
+    <slot />
+    <BackToTop />
+  </body>
+</html>

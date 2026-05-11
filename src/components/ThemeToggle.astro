@@ -1,0 +1,39 @@
+---
+---
+
+<button
+  id="theme-toggle"
+  type="button"
+  aria-label="Toggle color theme"
+  class="flex h-10 w-10 items-center justify-center rounded-full border border-line bg-white/5 text-slate-200 transition hover:border-cyan/60 hover:bg-cyan/10 hover:text-white"
+>
+  <svg class="theme-toggle-dark h-5 w-5" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+    <path d="M21 14.5A8.5 8.5 0 0 1 9.5 3a7 7 0 1 0 11.5 11.5Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+  </svg>
+  <svg class="theme-toggle-light hidden h-5 w-5" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+    <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8" />
+    <path d="M12 2.5v2M12 19.5v2M4.5 4.5l1.4 1.4M18.1 18.1l1.4 1.4M2.5 12h2M19.5 12h2M4.5 19.5l1.4-1.4M18.1 5.9l1.4-1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+  </svg>
+</button>
+
+<script>
+  const button = document.getElementById('theme-toggle');
+  const moonIcon = button?.querySelector('.theme-toggle-dark');
+  const sunIcon = button?.querySelector('.theme-toggle-light');
+
+  const applyTheme = (theme: string) => {
+    document.documentElement.dataset.theme = theme;
+    localStorage.setItem('theme', theme);
+    moonIcon?.classList.toggle('hidden', theme !== 'dark');
+    sunIcon?.classList.toggle('hidden', theme !== 'light');
+  };
+
+  const savedTheme = localStorage.getItem('theme');
+  const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+  applyTheme(savedTheme ?? (prefersLight ? 'light' : 'dark'));
+
+  button?.addEventListener('click', () => {
+    const nextTheme = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
+    applyTheme(nextTheme);
+  });
+</script>

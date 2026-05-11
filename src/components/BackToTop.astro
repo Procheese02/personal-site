@@ -1,0 +1,30 @@
+---
+---
+
+<button
+  id="back-to-top"
+  type="button"
+  aria-label="Back to top"
+  class="fixed bottom-6 right-6 z-50 flex h-12 w-12 translate-y-4 items-center justify-center rounded-full border border-line bg-panel/90 text-xl text-white opacity-0 shadow-2xl shadow-black/30 backdrop-blur transition duration-200 hover:border-cyan/60 hover:bg-cyan/15 focus:outline-none focus:ring-2 focus:ring-cyan/60"
+>
+  ↑
+</button>
+
+<script>
+  const button = document.getElementById('back-to-top');
+
+  const updateVisibility = () => {
+    if (!button) return;
+    const visible = window.scrollY > 420;
+    button.classList.toggle('opacity-0', !visible);
+    button.classList.toggle('translate-y-4', !visible);
+    button.classList.toggle('pointer-events-none', !visible);
+  };
+
+  button?.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  updateVisibility();
+  window.addEventListener('scroll', updateVisibility, { passive: true });
+</script>
